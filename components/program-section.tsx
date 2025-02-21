@@ -40,7 +40,24 @@ export function ProgramSection() {
   ];
 
   return (
-    <section className="bg-white py-12 lg:mx-8">
+    <section className="bg-white py-12 lg:mx-8 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <svg
+          className="w-full h-full opacity-[0.03]"
+          viewBox="0 0 1200 200"
+          preserveAspectRatio="none"
+        >
+          {[...Array(4)].map((_, i) => (
+            <path
+              key={i}
+              d={`M 0 ${60 + i * 60} Q 400 ${30 + i * 60} 800 ${60 + i * 60} T 1200 ${60 + i * 60}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+            />
+          ))}
+        </svg>
+      </div>
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">

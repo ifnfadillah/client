@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card"
 export default function BannerSection() {
   return (
     <section className="relative container overflow-hidden my-8">
-      <div className="absolute inset-0 lg:mx-8 md:rounded-2xl bg-gradient-to-r from-blue-500 to-blue-400">
+      <div className="absolute inset-0 lg:mx-10 md:rounded-2xl bg-gradient-to-r from-blue-500 to-blue-400">
         <svg
           className="absolute w-full h-full opacity-10"
           viewBox="0 0 1200 400"

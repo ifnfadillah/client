@@ -41,14 +41,14 @@ export function GallerySection() {
         <div className="flex flex-wrap justify-center gap-4">
           <Button 
             variant="outline" 
-            className={`bg-white rounded-2xl hover:bg-orange-50 ${activeTab === "gallery" ? " bg-gray-200" : ""}`} 
+            className={`bg-white rounded-2xl hover:bg-blue-200 ${activeTab === "gallery" ? " bg-blue-500 shadow-md text-white" : ""}`} 
             onClick={() => setActiveTab("gallery")}
           >
             Galeri Foto
           </Button>
           <Button 
             variant="outline" 
-            className={`bg-white rounded-2xl hover:bg-orange-50 ${activeTab === "youtube" ? " bg-gray-200" : ""}`} 
+            className={`bg-white rounded-2xl hover:bg-blue-200 ${activeTab === "youtube" ? " bg-blue-500 shadow-md text-white" : ""}`} 
             onClick={() => setActiveTab("youtube")}
           >
             Liputan Youtube

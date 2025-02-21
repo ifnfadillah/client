@@ -52,7 +52,7 @@ export default function NewsSection() {
           {blogPosts.map((post, index) => (
             <Card key={index} className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
               <Link href={`${post.slug}`} className="blank">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-36 overflow-hidden">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -64,17 +64,17 @@ export default function NewsSection() {
                   <span className="text-sm font-medium text-blue-500">
                     {post.author}
                   </span>
-                  <h3 className="text-xl font-semibold text-gray-900 mt-2 line-clamp-2">
+                  <h3 className="text-md font-semibold text-gray-900 mt-2 line-clamp-2">
                     {post.title}
                   </h3>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className="text-gray-600 text-xs line-clamp-3">
                     {post.description}
                   </p>
                 </CardContent>
                 <CardFooter>
-                  <span className="text-sm mx-auto w-full justify-center py-3 text-center rounded-sm bg-amber-500 hover:bg-amber-400 font-semibold text-white">
+                  <span className="text-xs mx-auto w-full justify-center py-3 text-center rounded-sm bg-amber-500 hover:bg-amber-400 font-semibold text-white">
                     BACA SELENGKAPNYA
                   </span>
                 </CardFooter>
