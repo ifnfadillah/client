@@ -120,17 +120,17 @@ export default function ChatbotInterface() {
         data.find((d: any) => d.custom?.quick_asks)?.custom.quick_asks || [];
 
       if (data[0]?.custom?.status === "info" && data[0]?.custom?.message) {
-        // Jika ada informasi dalam format teks biasa
         botMessages.push({
           role: "bot",
           content: data[0].custom.message.replace(/\n/g, "<br />"),
           quickAsks,
         });
+
         // TEKS & LIST (EVENT && KULINER && SITUS)
       } else if (data[0]?.custom?.list) {
         let formattedList = data[0].custom.list.map(
           (item: any, index: number) => (
-            <div key={index} className="mb-2 border-b">
+            <div key={index} className="mb-2">
               <strong>
                 {index + 1}. {item.name}
               </strong>
@@ -150,11 +150,12 @@ export default function ChatbotInterface() {
           ),
           quickAsks,
         });
+
         // TEKS & LIST (LAYANAN KESEHATAN)
       } else if (data[0]?.custom?.listLayananKesehatan) {
         let formattedList = data[0].custom.listLayananKesehatan.map(
           (item: any, index: number) => (
-            <div key={index} className="mb-2 border-b">
+            <div key={index} className="mb-2">
               <strong>
                 {index + 1}. {item.name}
               </strong>
@@ -177,6 +178,7 @@ export default function ChatbotInterface() {
           ),
           quickAsks,
         });
+
         // TEKS & MAPS
       } else if (data[0]?.custom?.text && data[0]?.custom?.maps) {
         const mapLink = data[0].custom.maps;
@@ -209,7 +211,6 @@ export default function ChatbotInterface() {
           mapLink,
         });
       } else if (data[0]?.text) {
-        //TEKS
         botMessages.push({
           role: "bot",
           content: (
