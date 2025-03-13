@@ -8,7 +8,6 @@ import Footer from "@/components/footer"
 import AssociationSection from "@/components/association-section"
 import BannerSection from "@/components/banner-section"
 import NewsSection from "@/components/news-section"
-import Hero2 from "@/components/hero2"
 import { GallerySection } from "@/components/gallery-section"
 
 export default function Home() {

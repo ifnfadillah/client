@@ -1,6 +1,7 @@
 import { CardHeader, CardTitle} from "@/components/ui/card"
 import { BotMessageSquare } from "lucide-react"
 import Image from "next/image"
+import { ModeToggle } from "./ui/mode-toggle"
 
 export function CustomCardHeader() {
   return (
@@ -12,20 +13,7 @@ export function CustomCardHeader() {
               </div>
       </div>
       <div className="flex items-center space-x-2">
-        <Image
-          src="/vokasi.jpg"
-          alt="Logo 1"
-          width={65}
-          height={65}
-          className="rounded-full"
-        />
-        <Image
-          src="/km.png"
-          alt="Logo 2"
-          width={65}
-          height={65}
-          className="rounded-full"
-        />
+        <ModeToggle />
       </div>
     </CardHeader>
   )
