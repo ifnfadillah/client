@@ -10,7 +10,7 @@ export default function AssociationSection() {
   const logos = [
     { src: "/UB.png", alt: "UB Logo" },
     { src: "/vokasi.jpg", alt: "Vokasi Logo" },
-    { src: "/km.png", alt: "Kampus Merdeka" },
+    { src: "/km.jpg", alt: "Kampus Merdeka" },
   ];
   const [showCarousel, setShowCarousel] = useState(false);
 
@@ -45,10 +45,10 @@ export default function AssociationSection() {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-black">
       <div className="container mx-auto px-8">
         <div className="items-center mx-auto justify-center text-center mb-12">
-        <p className="text-sm md:text-md font-semibold text-gray-700 justify-center mb-4">
+        <p className="text-sm md:text-md font-semibold text-gray-700 dark:text-white justify-center mb-4">
             MITRA & LEMBAGA ASOSIASI PENYELENGGARA
           </p>
           <div className="flex mb-4 justify-center">

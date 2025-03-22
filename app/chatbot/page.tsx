@@ -40,6 +40,7 @@ export default function ChatbotInterface() {
     "Kampung Cempluk",
     "Event-event Kampung Lingkar Kampus",
     "Ada situs-situs apa saja di sekitar?",
+    "Apa saja kuliner yang ada di klk?",
     "Apa saja layanan kesehatan yang ada di sekitar kampung lingkar kampus?",
     "Rekomendasi kuliner yang cocok untuk cuaca saat ini"
   ];

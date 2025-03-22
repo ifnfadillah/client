@@ -1,6 +1,9 @@
+'use client'
+
 import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { motion } from "framer-motion"
 
 interface NewsSection {
   author: string
@@ -38,52 +41,59 @@ export default function NewsSection() {
   return (
     <section className="py-32 px-4 md:px-6 mx-2 lg:mx-8">
       <div className="max-w-7xl mx-auto">
-      <div className="items-center mx-auto justify-center text-center mb-12">
-        <p className="text-sm md:text-md font-semibold text-gray-700 justify-center mb-4">
+        <div className="items-center mx-auto justify-center text-center mb-12">
+          <p className="text-sm md:text-md font-semibold text-gray-700 dark:text-white justify-center mb-4">
             BERITA & ARTIKEL
           </p>
           <div className="flex mb-4 justify-center">
-              <div className="flex text-2xl lg:text-4xl w-fit font-bold text-white bg-amber-500 text-center px-3 py-1 rounded-lg shadow-xl">
-                Beragam Liputan Seputar Jaringan Kampung
-              </div>
+            <div className="flex text-2xl lg:text-4xl w-fit font-bold text-white bg-amber-500 text-center px-3 py-1 rounded-lg shadow-xl">
+              Beragam Liputan Seputar Jaringan Kampung
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post, index) => (
-            <Card key={index} className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <Link href={`${post.slug}`} className="blank">
-                <div className="relative h-36 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <CardHeader>
-                  <span className="text-sm font-medium text-blue-500">
-                    {post.author}
-                  </span>
-                  <h3 className="text-md font-semibold text-gray-900 mt-2 line-clamp-2">
-                    {post.title}
-                  </h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-xs line-clamp-3">
-                    {post.description}
-                  </p>
-                </CardContent>
-                <CardFooter>
-                  <span className="text-xs mx-auto w-full justify-center py-3 text-center rounded-sm bg-amber-500 hover:bg-amber-400 font-semibold text-white">
-                    BACA SELENGKAPNYA
-                  </span>
-                </CardFooter>
-              </Link>
-            </Card>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} // Animasi hanya sekali saat elemen pertama kali masuk viewport
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+            >
+              <Card className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Link href={`${post.slug}`} className="blank">
+                  <div className="relative h-36 overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <CardHeader>
+                    <span className="text-sm font-medium text-blue-500">
+                      {post.author}
+                    </span>
+                    <h3 className="text-md font-semibold text-gray-900 dark:text-white mt-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-white text-xs line-clamp-3">
+                      {post.description}
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    <span className="text-xs mx-auto w-full justify-center py-3 text-center rounded-sm bg-amber-500 hover:bg-amber-400 font-semibold text-white">
+                      BACA SELENGKAPNYA
+                    </span>
+                  </CardFooter>
+                </Link>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   )
 }
-

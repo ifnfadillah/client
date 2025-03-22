@@ -3,7 +3,7 @@ import Navbar from "@/components/navbar"
 import { ChatbotSection } from "@/components/chatbot-section"
 import ChatbotButton from "@/components/ui/chatbot-button"
 import { ProgramSection } from "@/components/program-section"
-import CTABanner from "@/components/banner-section"
+import { KampungSection } from "@/components/kampung-section"
 import Footer from "@/components/footer"
 import AssociationSection from "@/components/association-section"
 import BannerSection from "@/components/banner-section"
@@ -13,18 +13,35 @@ import { GallerySection } from "@/components/gallery-section"
 export default function Home() {
   return (
     <>
+      <Navbar /> 
       <main>
-        <Hero/>
-        <ProgramSection/>
-        <GallerySection />
-        <ChatbotSection/>
-        <NewsSection />
-        <BannerSection />
-        <AssociationSection />
+        <section id="home">
+          <Hero />
+        </section>
+        <section id="about">
+          <ProgramSection />
+        </section>
+        <section id="event">
+          <KampungSection />
+        </section>
+        <section id="galeri">
+          <GallerySection />
+        </section>
+        <section id="chatbot">
+          <ChatbotSection />
+        </section>
+        <section id="berita">
+          <NewsSection />
+        </section>
+        <section id="banner">
+          <BannerSection />
+        </section>
+        <section id="association">
+          <AssociationSection />
+        </section>
       </main>
       <ChatbotButton />
       <Footer />
     </>
   )
 }
-

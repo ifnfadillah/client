@@ -47,7 +47,7 @@ export default function BannerSection() {
                 <div className="space-y-2">
                   <h3 className="text-md md:text-xl font-semibold">Komunitas Kampung Lingkar Kampus</h3>
                   <p className="opacity-90 text-sm">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat ex nulla, doloribus nobis aliquid, 
+                  Bergabung menjadi komunitas Kampung Lingkar Kampus
                   </p>
                 </div>
               </div>
@@ -61,7 +61,7 @@ export default function BannerSection() {
                 <div className="space-y-2">
                   <h3 className="text-md md:text-xl font-semibold">Mitra & Sponsor</h3>
                   <p className="opacity-90 text-sm">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat ex nulla, doloribus nobis aliquid,
+                    Bergabung menjadi Mitra & Sponsor dari kegiatan Kampung Lingkar Kampus
                   </p>
                 </div>
               </div>

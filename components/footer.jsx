@@ -1,12 +1,26 @@
+'use client'
+
 import Image from 'next/image'
-import { CircleUserRound, Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function Footer() {
   return (
-    <footer className="w-full px-4 py-6 bg-white border-t-2">
+    <motion.footer 
+      className="w-full px-4 py-6 bg-white dark:bg-black border-t-2"
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }} 
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
       <div className="max-w-7xl mx-8 space-y-8">
-        <div className="flex justify-between items-center">
+        <motion.div 
+          className="flex justify-between items-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="flex items-center gap-2">
             <Image
               src="/"
@@ -23,58 +37,72 @@ export default function Footer() {
             height={125}
             className=""
           />
-        </div>
+        </motion.div>
 
-        <div className="space-y-4 text-gray-500 text-sm">
+        <motion.div 
+          className="space-y-4 text-gray-500 dark:text-white text-xs md:text-sm"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
           <p>
-            Kampung Lingkar Kampus ("KLK") Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi, nam tenetur vero aliquid nihil accusantium atque corrupti natus, laudantium architecto adipisci sit et ratione unde aperiam laboriosam amet ipsa provident?.
+            Kampung Lingkar Kampus merupakan program yang membantu mahasiswa dalam mengenal dinamika sosial-ekonomi melalui sejarah, kesenian budaya, pelayanan informasi kampung, layanan kesehatan dan kuliner yang ada di kampung-kampung sekitar kampus Universitas Brawijaya.
           </p>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium similique ex cupiditate minus est quasi nisi maiores beatae magnam, possimus sequi odio placeat consequatur rerum, porro doloribus! Id, sint nihil.
+            Semua informasi yang disajikan telah melalui validasi dan semoga dapat membantu mahasiswa ataupun masyarakat sekitar dalam mengenal dinamika sosial-ekonomi melalui sejarah, kesenian budaya, pelayanan informasi kampung, layanan kesehatan dan kuliner yang ada di kampung-kampung sekitar kampus Universitas Brawijaya.
           </p>
-        </div>
+        </motion.div>
 
-          <div className="flex justify-between border-t-2">
-            <div className="text-sm text-gray-600 mt-5">
-              KLK Copyright © 2025 . All rights reserved
-            </div>
-            <div className="flex gap-4 mt-4 md:mt-2.5">
-              <Link 
-                href="https://facebook.com" 
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook className="w-6 h-6 text-gray-600 hover:text-blue-600" />
-              </Link>
-              <Link 
-                href="https://twitter.com" 
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter className="w-6 h-6 text-gray-600 hover:text-blue-400" />
-              </Link>
-              <Link 
-                href="https://instagram.com" 
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="w-6 h-6 text-gray-600 hover:text-pink-600" />
-              </Link>
-              <Link 
-                href="https://youtube.com" 
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Youtube className="w-6 h-6 text-gray-600 hover:text-red-600" />
-              </Link>
-            </div>
+        <motion.div 
+          className="flex justify-between border-t-2"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <div className="text-xs md:text-sm text-gray-600 dark:text-white mt-5">
+            KLK Copyright © 2025 . All rights reserved
           </div>
+          <motion.div
+            className="flex gap-4 mt-4 md:mt-2.5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Link 
+              href="https://facebook.com" 
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook className="w-6 h-6 text-gray-600 dark:text-white hover:text-blue-600" />
+            </Link>
+            <Link 
+              href="https://twitter.com" 
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Twitter className="w-6 h-6 text-gray-600 dark:text-white hover:text-blue-400" />
+            </Link>
+            <Link 
+              href="https://instagram.com" 
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="w-6 h-6 text-gray-600 dark:text-white hover:text-pink-600" />
+            </Link>
+            <Link 
+              href="https://youtube.com" 
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Youtube className="w-6 h-6 text-gray-600 dark:text-white hover:text-red-600" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
-

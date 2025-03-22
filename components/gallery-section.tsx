@@ -1,8 +1,8 @@
 'use client'
+
 import { Button } from "@/components/ui/button"
-import { Link } from "lucide-react"
-import Image from "next/image"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 export function GallerySection() {
   const [activeTab, setActiveTab] = useState("gallery")
@@ -35,29 +35,42 @@ export function GallerySection() {
     <section className="py-20 mx-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-center space-x-2 mb-8 space-y-4 lg:space-y-0">
-        <h2 className="text-3xl font-bold text-center">Galeri</h2>
-        <h2 className="flex text-2xl lg:text-3xl w-fit font-bold text-white bg-amber-500 px-3 py-1 rounded-lg shadow-xl">Kampung Lingkar Kampus</h2>
+          <h2 className="text-3xl font-bold text-center">Galeri</h2>
+          <h2 className="flex text-center text-xl lg:text-3xl w-fit font-bold text-white bg-amber-500 px-3 py-1 rounded-lg shadow-xl">Kampung Lingkar Kampus</h2>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           <Button 
             variant="outline" 
-            className={`bg-white rounded-2xl hover:bg-blue-200 ${activeTab === "gallery" ? " bg-blue-500 shadow-md text-white" : ""}`} 
+            className={`bg-white dark:bg-black dark:text-white dark:hover:bg-gray-700 dark:outline-2 rounded-2xl hover:bg-blue-200 ${activeTab === "gallery" ? " bg-blue-500 dark:bg-blue-500 dark:text-white shadow-md text-white" : ""}`} 
             onClick={() => setActiveTab("gallery")}
           >
             Galeri Foto
           </Button>
           <Button 
             variant="outline" 
-            className={`bg-white rounded-2xl hover:bg-blue-200 ${activeTab === "youtube" ? " bg-blue-500 shadow-md text-white" : ""}`} 
+            className={`bg-white dark:bg-black dark:text-white dark:hover:bg-gray-700 dark:outline-2 rounded-2xl hover:bg-blue-200 ${activeTab === "youtube" ? " bg-blue-500 dark:bg-blue-500 dark:text-white shadow-md text-white" : ""}`} 
             onClick={() => setActiveTab("youtube")}
           >
             Liputan Youtube
           </Button>
         </div>
         {activeTab === "gallery" ? (
-          <div id="foto" className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+            id="foto"
+            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          >
             {blogPosts.map((post, index) => (
-              <div key={index} className="aspect-video relative overflow-hidden rounded-lg">
+              <motion.div
+                key={index}
+                className="aspect-video relative overflow-hidden rounded-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 1.5, delay: index * 0.2 }}
+              >
                 <img
                   src={post.image}
                   alt={`Gallery image ${index + 1}`}
@@ -69,13 +82,26 @@ export function GallerySection() {
                     <p>{post.date}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : (
-          <div id="youtube" className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            id="youtube"
+            className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             {youtubeVideos.map((videoId, index) => (
-              <div key={index} className="aspect-video">
+              <motion.div
+                key={index}
+                className="aspect-video"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
                 <iframe 
                   width="100%" 
                   height="100%" 
@@ -85,12 +111,11 @@ export function GallerySection() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen
                 ></iframe>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
   )
 }
-
