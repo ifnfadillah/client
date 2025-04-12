@@ -295,7 +295,7 @@ export default function ChatbotInterface() {
   return (
     <>
       <div className="flex items-center justify-center bg-gray-100 dark:bg-black py-4 px-4">
-        <Card className="w-full h-[95vh] flex flex-col">
+        <Card className="w-full md:h-[95vh] h-[75vh] flex flex-col">
           <CustomCardHeader />
           <CardContent className="flex-grow overflow-hidden py-2">
             <ScrollArea className="h-full pr-4">
