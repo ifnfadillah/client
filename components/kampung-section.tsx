@@ -2,8 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import dynamic from 'next/dynamic'
-import L, { divIcon, LatLngTuple } from "leaflet"
-import "leaflet/dist/leaflet.css"
+import { LatLngTuple } from "leaflet"
 
 // Tambahkan interface untuk data kampung
 interface KampungData {
@@ -16,25 +15,6 @@ interface KampungData {
 
 interface KampungLocations {
   [key: string]: KampungData;
-}
-
-const createLucideIcon = (text: string) => {
-  return divIcon({
-    className: "text-marker",
-    html: `
-      <div style="display: flex; align-items: center; background: white; padding: 6px 10px; border-radius: 6px; font-weight: bold; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" style="margin-right: 6px;">
-          <path d="M12 21s-6-5.14-6-10a6 6 0 1 1 12 0c0 4.86-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>
-        </svg>
-        ${text}
-      </div>`,
-    iconSize: [120, 30],
-    iconAnchor: [60, 15]
-  })
-}
-
-interface ChangeViewProps {
-  center: [number, number];
 }
 
 // Data Kampung (Lat, Lng, dan Geofence)
@@ -85,37 +65,11 @@ const kampungLocations: KampungLocations = {
   },
 }
 
-// Dynamic import untuk MapContainer
-const MapContainer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.MapContainer),
-  { ssr: false }
-);
-
-const TileLayer = dynamic(
-  () => import('react-leaflet').then((mod) => mod.TileLayer),
-  { ssr: false }
-);
-
-const Marker = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Marker),
-  { ssr: false }
-);
-
-const Polygon = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Polygon),
-  { ssr: false }
-);
-
-const ChangeView = dynamic(
-  () => import('react-leaflet').then((mod) => mod.useMap).then((useMap) => {
-    return function ChangeView({ center }: ChangeViewProps) {
-      const map = useMap();
-      map.setView(center, 16);
-      return null;
-    };
-  }),
-  { ssr: false }
-);
+// Dynamic import untuk KampungMap
+const KampungMap = dynamic(() => import('./kampung-map').then(mod => mod.KampungMap), {
+  ssr: false,
+  loading: () => <div className="h-96 w-full flex items-center justify-center">Loading map...</div>
+})
 
 export function KampungSection() {
   const [activeTab, setActiveTab] = useState<string | null>(null) 
@@ -158,32 +112,11 @@ export function KampungSection() {
         </div>
         <div className="mt-8">
           {isMounted && (
-            <MapContainer 
-              center={showAll ? [-7.9450, 112.6125] : [kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} 
-              zoom={showAll ? 14 : 16} 
-              className="h-96 w-full rounded-lg shadow-lg relative z-10"
-            >
-              <TileLayer 
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
-              />
-
-              {!showAll && <ChangeView center={[kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} />}
-
-              {Object.keys(kampungLocations).map((key) => (
-                (showAll || key === activeTab) && (
-                  <div key={key}>
-                    <Marker 
-                      position={[kampungLocations[key].lat, kampungLocations[key].lng]}
-                      icon={createLucideIcon(kampungLocations[key].name)}
-                    />
-                    <Polygon 
-                      positions={kampungLocations[key].geofence}
-                      pathOptions={{ color: kampungLocations[key].color, weight: 2, opacity: 0.6 }}
-                    />
-                  </div>
-                )
-              ))}
-            </MapContainer>
+            <KampungMap 
+              kampungLocations={kampungLocations}
+              activeTab={activeTab}
+              showAll={showAll}
+            />
           )}
         </div>
       </div>
