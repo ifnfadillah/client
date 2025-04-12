@@ -1,12 +1,24 @@
 'use client'
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { MapContainer, TileLayer, Marker, Polygon, useMap } from "react-leaflet"
-import L, { divIcon } from "leaflet"
+import { useState, useEffect } from "react"
+import dynamic from 'next/dynamic'
+import L, { divIcon, LatLngTuple } from "leaflet"
 import "leaflet/dist/leaflet.css"
 
-// Fungsi untuk membuat ikon Lucide + Nama Kampung dalam Marker
-const createLucideIcon = (text) => {
+// Tambahkan interface untuk data kampung
+interface KampungData {
+  name: string;
+  lat: number;
+  lng: number;
+  geofence: LatLngTuple[];
+  color: string;
+}
+
+interface KampungLocations {
+  [key: string]: KampungData;
+}
+
+const createLucideIcon = (text: string) => {
   return divIcon({
     className: "text-marker",
     html: `
@@ -21,8 +33,12 @@ const createLucideIcon = (text) => {
   })
 }
 
+interface ChangeViewProps {
+  center: [number, number];
+}
+
 // Data Kampung (Lat, Lng, dan Geofence)
-const kampungLocations = {
+const kampungLocations: KampungLocations = {
   ketawanggede: { 
     name: "Kampung Ketawanggede", 
     lat: -7.9495, 
@@ -69,15 +85,46 @@ const kampungLocations = {
   },
 }
 
-const ChangeView = ({ center }) => {
-  const map = useMap()
-  map.setView(center, 16)
-  return null
-}
+// Dynamic import untuk MapContainer
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+
+const Polygon = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Polygon),
+  { ssr: false }
+);
+
+const ChangeView = dynamic(
+  () => import('react-leaflet').then((mod) => mod.useMap).then((useMap) => {
+    return function ChangeView({ center }: ChangeViewProps) {
+      const map = useMap();
+      map.setView(center, 16);
+      return null;
+    };
+  }),
+  { ssr: false }
+);
 
 export function KampungSection() {
-  const [activeTab, setActiveTab] = useState(null) 
+  const [activeTab, setActiveTab] = useState<string | null>(null) 
   const showAll = activeTab === null 
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <section className="mt-10 mx-8">
@@ -110,34 +157,34 @@ export function KampungSection() {
           ))}
         </div>
         <div className="mt-8">
-          <MapContainer 
-            center={showAll ? [-7.9450, 112.6125] : [kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} 
-            zoom={showAll ? 14 : 16} 
-            className="h-96 w-full rounded-lg shadow-lg relative z-10"
-          >
-            <TileLayer 
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
-            />
+          {isMounted && (
+            <MapContainer 
+              center={showAll ? [-7.9450, 112.6125] : [kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} 
+              zoom={showAll ? 14 : 16} 
+              className="h-96 w-full rounded-lg shadow-lg relative z-10"
+            >
+              <TileLayer 
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
+              />
 
-            {!showAll && <ChangeView center={[kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} />}
+              {!showAll && <ChangeView center={[kampungLocations[activeTab].lat, kampungLocations[activeTab].lng]} />}
 
-            {Object.keys(kampungLocations).map((key) => (
-              (showAll || key === activeTab) && (
-                <>
-                  <Marker 
-                    key={`marker-${key}`} 
-                    position={[kampungLocations[key].lat, kampungLocations[key].lng]}
-                    icon={createLucideIcon(kampungLocations[key].name)}
-                  />
-                  <Polygon 
-                    key={`polygon-${key}`} 
-                    positions={kampungLocations[key].geofence}
-                    pathOptions={{ color: kampungLocations[key].color, weight: 2, opacity: 0.6 }}
-                  />
-                </>
-              )
-            ))}
-          </MapContainer>
+              {Object.keys(kampungLocations).map((key) => (
+                (showAll || key === activeTab) && (
+                  <div key={key}>
+                    <Marker 
+                      position={[kampungLocations[key].lat, kampungLocations[key].lng]}
+                      icon={createLucideIcon(kampungLocations[key].name)}
+                    />
+                    <Polygon 
+                      positions={kampungLocations[key].geofence}
+                      pathOptions={{ color: kampungLocations[key].color, weight: 2, opacity: 0.6 }}
+                    />
+                  </div>
+                )
+              ))}
+            </MapContainer>
+          )}
         </div>
       </div>
     </section>

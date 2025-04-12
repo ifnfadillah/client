@@ -3,12 +3,17 @@ import Navbar from "@/components/navbar"
 import { ChatbotSection } from "@/components/chatbot-section"
 import ChatbotButton from "@/components/ui/chatbot-button"
 import { ProgramSection } from "@/components/program-section"
-import { KampungSection } from "@/components/kampung-section"
+import dynamic from 'next/dynamic'
 import Footer from "@/components/footer"
 import AssociationSection from "@/components/association-section"
 import BannerSection from "@/components/banner-section"
 import NewsSection from "@/components/news-section"
 import { GallerySection } from "@/components/gallery-section"
+
+const KampungSection = dynamic(() => import('@/components/kampung-section').then(mod => mod.KampungSection), {
+  ssr: false,
+  loading: () => <div className="h-96 w-full flex items-center justify-center">Loading map...</div>
+})
 
 export default function Home() {
   return (

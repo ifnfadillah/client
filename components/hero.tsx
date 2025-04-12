@@ -39,7 +39,6 @@ export function Hero() {
                     loop: true,
                     delay: 150,
                     deleteSpeed: 100,
-                    pauseFor: 1500,
                   }}
                 />
               </h1>
