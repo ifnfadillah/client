@@ -49,10 +49,10 @@ export default function Navbar() {
           >
             <Image
               src="/logo.png"
-              className="h-8 mr-3"
+              className="h-full w-full mr-3"
               alt="Logo KLK"
-              width={32}
-              height={32}
+              width={100}
+              height={50}
             />
           </ScrollLink>
           <div className="sm:hidden">

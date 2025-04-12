@@ -23,11 +23,11 @@ export default function Footer() {
         >
           <div className="flex items-center gap-2">
             <Image
-              src="/"
+              src="/logo.png"
               alt="KLK Logo"
-              width={89}
-              height={32}
-              className="h-8"
+              width={160}
+              height={125}
+              className=""
             />
           </div>
           <Image

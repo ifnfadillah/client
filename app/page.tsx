@@ -12,7 +12,7 @@ import { GallerySection } from "@/components/gallery-section"
 
 export default function Home() {
   return (
-    <>
+    <> 
       <Navbar /> 
       <main>
         <section id="home">
