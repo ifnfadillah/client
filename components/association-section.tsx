@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function AssociationSection() {
   const logos = [
-    { src: "/UB.png", alt: "UB Logo" },
+    { src: "/ub.jpeg", alt: "UB Logo" },
     { src: "/vokasi.jpg", alt: "Vokasi Logo" },
     { src: "/km.jpg", alt: "Kampus Merdeka" },
   ];
