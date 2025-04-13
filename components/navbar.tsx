@@ -35,7 +35,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-200 ${
         scrolled ? "bg-white dark:bg-black" : "bg-transparent dark:bg-black"
-      } backdrop-blur-md`}
+      }`}
     >
       <nav className="relative max-w-[75rem] w-full mx-auto px-4 sm:flex sm:items-center" aria-label="Global">
         <div className="flex items-center justify-between w-full sm:w-auto">
